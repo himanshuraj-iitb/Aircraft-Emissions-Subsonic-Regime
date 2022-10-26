@@ -1,0 +1,323 @@
+% mnras_template.tex 
+%
+% LaTeX template for creating an MNRAS paper
+%
+% v3.0 released 14 May 2015
+% (version numbers match those of mnras.cls)
+%
+% Copyright (C) Royal Astronomical Society 2015
+% Authors:
+% Keith T. Smith (Royal Astronomical Society)
+
+% Change log
+%
+% v3.0 May 2015
+%    Renamed to match the new package name
+%    Version number matches mnras.cls
+%    A few minor tweaks to wording
+% v1.0 September 2013
+%    Beta testing only - never publicly released
+%    First version: a simple (ish) template for creating an MNRAS paper
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Basic setup. Most papers should leave these options alone.
+\documentclass[fleqn,usenatbib]{mnras}
+
+% MNRAS is set in Times font. If you don't have this installed (most LaTeX
+% installations will be fine) or prefer the old Computer Modern fonts, comment
+% out the following line
+\usepackage{newtxtext,newtxmath}
+% Depending on your LaTeX fonts installation, you might get better results with one of these:
+%\usepackage{mathptmx}
+%\usepackage{txfonts}
+
+% Use vector fonts, so it zooms properly in on-screen viewing software
+% Don't change these lines unless you know what you are doing
+\usepackage[T1]{fontenc}
+
+% Allow "Thomas van Noord" and "Simon de Laguarde" and alike to be sorted by "N" and "L" etc. in the bibliography.
+% Write the name in the bibliography as "\VAN{Noord}{Van}{van} Noord, Thomas"
+\DeclareRobustCommand{\VAN}[3]{#2}
+\let\VANthebibliography\thebibliography
+\def\thebibliography{\DeclareRobustCommand{\VAN}[3]{##3}\VANthebibliography}
+
+
+%%%%% AUTHORS - PLACE YOUR OWN PACKAGES HERE %%%%%
+
+% Only include extra packages if you really need them. Common packages are:
+\usepackage{graphicx}	% Including figure files
+\usepackage{amsmath}	% Advanced maths commands
+% \usepackage{amssymb}	% Extra maths symbols
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%% AUTHORS - PLACE YOUR OWN COMMANDS HERE %%%%%
+
+% Please keep new commands to a minimum, and use \newcommand not \def to avoid
+% overwriting existing commands. Example:
+%\newcommand{\pcm}{\,cm$^{-2}$}	% per cm-squared
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%% TITLE PAGE %%%%%%%%%%%%%%%%%%%
+
+% Title of the paper, and the short title which is used in the headers.
+% Keep the title short and informative.
+\title[Aircraft Emissions]{Aircraft Emissions}
+
+% The list of authors, and the short list which is used in the headers.
+% If you need two or more lines of authors, add an extra line using \newauthor
+\author[Himanshu et al.]{
+Himanshu Raj,$^{1}$\thanks{E-mail: 20d180015@iitb.ac.in}
+Yash Dhansare,$^{2}$\thanks{E-mail: 20d180013@iitb.ac.in}
+\\
+% List of institutions
+$^{1}$Environmental Science and Engineering Dept.,Indian Institute of Technology Bombay, Mumbai\\
+$^{2}$Environmental Science and Engineering Dept.,Indian Institute of Technology Bombay, Mumbai\\
+%$^{3}$Another Department, Different Institution, Street Address, City Postal Code, Country
+}
+
+% These dates will be filled out by the publisher
+\date{\today}
+
+% Enter the current year, for the copyright statements etc.
+%\pubyear{2022}
+
+% Don't change these lines
+\begin{document}
+\label{firstpage}
+\pagerange{\pageref{firstpage}--\pageref{lastpage}}
+\maketitle
+
+% Abstract of the paper
+\begin{abstract}
+Through this paper, we have tried to study emissions of various pollutants viz., $NO_x$, $SO_X$, VOCs, soot, PMs and nevertheless, GHGs and formation of cirrus clouds or contrails. We have studied the emissions from various types of jet engines \textemdash Turbo-Jet, Turbo fan,the two widely used engines for subsonic flights, their Thrust Specific Fuel Consumption (TSFC) in different modes of flight \textemdash Landing and Take-off cycle, LTO cycle and, climb, cruise and descent, CCD cycle. The parameters to study the Local Air Quality, LAQ, are selected as the ones mentioned above. Boeing Fuel Flow method, dealt here in detail, is utilised to calculate the emissions, which is quite robust. However, their computations using MATLAB is kept to work upon, in the final presentation. We will also look upon different regimes of flight, namely, subsonic and supersonic. But, our domain is limited only to subsonic civil aircraft, and we have left supersonic  general and military aviation for our future works.
+\end{abstract}
+
+% Select between one and six entries from the list of approved keywords.
+% Don't make up new ones.
+\begin{keywords}
+fuel-flow -- contrails -- supersonic -- subsonic -- cruising -- MATLAB -- descent -- general aviation
+\end{keywords}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%% BODY OF PAPER %%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+There has been a colossal growth in aircraft industry from the last 50 years. It plays a vital role in the transportation section in the present era. There are around 25000 commercial aircrafts operating over routes of around 15 million kms, serving 10,000 airports and carrying 4.5 billion passengers per year. Aircrafts has been a major source of GHGs as they release $CO_2$ and water-vapour in a huge amount. In addition to that they emit many pollutants including PMs, Nitrogen Oxides, hydrocarbons, sulphurs etc. They are either an air-pollutant and/or a precursor to many other pollutants. The fuel commonly used in commercial aircrafts are kerosene-based jet fuels. Aviation fuels consumes around 2-3 percent fossil fuels, corresponding to 20 percents of all transportation fuels, of which, 80 percent is used by civil aircrafts. The service cruising altitude of the flights has been increased to around 30000 - 40000 feets. This is done mainly to reduce drag and for safety purposes. The region of cruising lies between upper troposphere to lower stratosphere. At that region there is high stability of the pollutants and so their residence times. Atmospheric residence time of $CO_2$ is found out to be approx 100 years. This causes a problems here, that, it mixes so well in the atmosphere that it becomes impossible to distinguish the effects of the aircraft emission and emissions from other sources. Hence, the study of their impacts to the climate change is more important rather than its emission. This becomes true for all the GHGs. We use the concept of radiative forcing here, to study the net climate-change. This makes its study less important as compared to the pollutants. \\
+
+Pollutants on the other hand have very low residence times in the atmosphere. Also, they are concentrated only in some regions \textemdash northern mid-latitudes, since major airports of the world, such as JFK, LAX, LHR, PEK, PVG are located here. These emissions can show its effects only in some regions unlike the GHGs, which has a global effect on climate-change. Aircrafts are the only source of PM in the upper troposphere, and their emissions at cruise altitudes, remains suspended for several weeks or even months before they settle down to earth's surface. They affect the climate by absorbing and reflecting solar radiation. This is the direct effect. Their indirect effect to climate, is by forming cloud condensation nuclei (CCN) or ice nucleating particle (INP), by forming cirrus clouds and condensation trails colloquially known as contrails (\cite{C. Zhang2022}). The sulphates and nitrates released after combustion of the fuels, forms inorganic volatile aerosols, upon which the water-vapor released, gets condensed. In other words, they are icy-particles and sulphates and nitrates acts as a nuclei for the cloud growth. There is a net heating effect due to the contrails. It has been found that due to the contrails, the difference between the diurnal variation of temperature was $1.1^o$C more than as compared to without contrails.\\
+
+
+
+\subsection{Power-plants used in aircrafts}
+Earlier, flights used a reciprocating engine known as \textbf{Piston-Prop engine}, a typical cylinder or IC engine, which worked on Otto Cycle, a 4-stroke combustion cycle. The energy released after the combustion, is utilised to rotate a shaft, which in turn rotates a propeller which provides thrust to the aircraft. This has now become an outdated technology, and any civil aircraft does not uses this type of engines. So, we will carry on this any further. \\
+Right from the inception of the jet-engine, aircraft industry experienced a major break-through. A jet engine draws a free-stream of air at a low velocity and compresses it and then burn it to increase its kinetic energy. A part of this high kinetic energy is imparted to the turbine which runs the compressor and other electrical units and a part of it is exited from the nozzle having a very small cross-section, with a very high velocity, which provides a huge amount to thrust. Some aircrafts uses after-burner so as to increase the thrust, but it increases fuel-consumption and the high temperature results in the formation of nitrogen-oxides. A schematic of a turbojet engine(the very basic jet engine) is shown in Figure 1. The diffuser at the intake is modified according to the flight regime, i.e., subsonic or supersonic, which is governed by the free-stream Mach No., ratio of free-stream air velocity to the speed of sound. If Mach no., M $>1$, the flight is at a supersonic speed and if M $<1$, it will be at subsonic speed. \\
+\begin{figure}
+	% To include a figure from a file named example.*
+	% Allowable file formats are eps or ps if compiling using latex
+	% or pdf, png, jpg if compiling using pdflatex
+	\includegraphics[width=\columnwidth]{turbojet.png}
+    \caption{Turbojet engine.}
+    \label{fig:example_figure}
+\end{figure}
+However, commercial aircrafts do not use turbojet engines, because of its high fuel consumption and low thrust obtained. They rely upon \textbf{Turbo fan engine}, which has a fan at the inlet. The fan draws the free-stream air and a part of air bypasses the main core-duct of the engine and the remaining goes into the main duct where it is burnt the same way as in the turbojet. An important metric to calculate the efficiency of a turbofan engine is the \textbf{bypass ratio}. Bypass ratio os defined as the ratio of mass flow rate of air from the bypass duct to the mass flow rate of air from the core duct. The higher the bypass ratio, the more efficient the engine is, and lesser is the emissions. Here, the large fan also acts like a propeller, which provides a thrust, in addition to the burnt gases. It is noteworthy that an engine with low-bypass ratio is more fuel-efficient than a conventional turbojets. The only trade-off is that it requires a large nacelle, with a large inlet cross-section area, to mount a big fan, which makes it costlier both in terms of structural and maintenance.
+\begin{figure}
+	% To include a figure from a file named example.*
+	% Allowable file formats are eps or ps if compiling using latex
+	% or pdf, png, jpg if compiling using pdflatex
+	\includegraphics[width=\columnwidth]{turbofan.png}
+    \caption{Turbofan Engine.}
+    \label{fig:example_figure}
+\end{figure}
+%All papers should start with an Introduction section, which sets the work
+%in context, cites relevant earlier studies in the field by \citet{Fournier1901},
+%and describes the problem the authors aim to solve \citep[e.g.][]{vanDijk1902}.
+%Multiple citations can be joined in a simple way like \citet{deLaguarde1903, delaGuarde1904}.
+
+\section{Methods}
+Emissions inventory should be tabulated by keeping in mind, not only the cruising period, but also the taxing, take-off and landing periods, because the pollutants are released close to the ground. Also, a high power is needed during take-off and climbs, so $NO_x$ production is relatively higher while during landing, and cruise when low-power is needed, HC and CO emissions are higher.\\
+$CO_2$ emissions are calculated using the formula described below \textemdash 
+ \begin{equation}
+E_{CO_2} = \frac{(1/SAR)_{AVG}}{RGF^{0.24}}
+\label{eq:CO2}
+    \end{equation}
+Here, \textbf{SAR} stands for specific air range which is \textbf{the distance traveled by an aircraft per unit of fuel consumed}, and \textbf{RGF} is the reference geometric factor, which is the \textbf{proxy for approximating the seating area of the aircraft}. Also, it is important to mention that , SAR is a metric of measuring an aircraft's cruise performance, and is a function of aircraft's true air speed, its gross weight and aerodynamic characteristics, such as fuselage shape, wing shape, swept angle of the wing, canard or non-canard etc. For a double decker aircraft, like, \textbf{Boeing 747, Airbus A380}, RGF is calculated by adding the floor area of the upper deck to the shadow area of the pressurised fuselage. This method is described in \ref{eq:CO2} is devised by ICAO, and it intends to normalise the aircrafts variations in terms of shape and size to shorten the stringency line. \\
+
+Now when it comes about the pollutant, we have several mathematical models to find out the emissions, analytically. European emissions have been calculated widely using the relation given below \textemdash
+\begin{equation}
+TE_p = \Sigma_r \Sigma_p SE_{j,p,r} \times N_{j,r}
+\label{eq:euro_emissions}
+\end{equation}
+where,\\
+\begin{equation}
+    SE_{j,p,r} = \int_{D_1(A)} ^ {D_2(A)} FC_{j} (D_r) \times EI_{j,p}(D_r) dD_r
+\end{equation}
+Here, $TE_p$ is the total emission of pollutant p (kg per period), $SE_{j,p,r}$ is the specific emission of pollutant p from aircraft-engine combination j on route r (kg per aircraft). $N_{j,r}$ is the number of aircrafts of category j on route r during that period and $FC_{j}(D_r)$ is the fuel consumption of aircraft of category j, per unit distance in that route, expressed in kg per km.$EI_{j,p}(D_r)$ is the emission index for pollutant p from category j-aircrafts, expressed in kg of pollutant per kg of fuel consumed. $D_r$ is the distance between airports on route r, hence, $D_2(A) - D_1(A)$ is the distance flown within an area A. It is mandatory for the flights to fly only in certain specific routes, like, M-635, stands for Mike 635, in which flight service between Singapore and Indonesia. \\
+ Now, finding the EIs for each pollutant is a bit tedious task, but thanks to Boeing for devising a robust model to calculate the same. Boeing has come up with a method called \textbf{Fuel Flow Method 2} to calculate the emission indices, with various correction factors, to make our data come up within a 95 percent confidence level. \\
+ \subsection{P3T3 Method}
+ Before the inception of FFM2, P3T3 method was widely used, which requires the knowledge of the combustor inlet total pressure, $P_3$ and temperature $T_3$. Emission factors are calculated for $NO_X$, $HC$ and $CO$. EI is calculated in a sea-level ISA condition and then they are calculated for an altitude using the relations given below \textemdash
+ \begin{equation}
+ \begin{split}
+     EICO_{alt} &= EICO_{sl} ({\frac{P_3,sl}{P_3,alt}})^x ({\frac{FAR_{sl}}{FAR_{alt}}})^z \\
+      EIHC_{alt} &= EIHC_{sl} ({\frac{P_3,sl}{P_3,alt}})^x ({\frac{FAR_{sl}}{FAR_{alt}}})^z \\
+       EINO_{x,alt} &= EINO_{x,sl} ({\frac{P_3,sl}{P_3,alt}})^y ({\frac{FAR_{sl}}{FAR_{alt}}})^y e^H
+       \end{split}
+ \end{equation}
+ The last  equation contains an additional factor, known as \textbf{Humidity Correction Factor}. $NO_x$ emissions depends upon the relative humidity of the ambient air \textemdash as RH increases $NO_x$ emissions decreases because the high concentration of water molecules decreases the peak temperature required for $NO_x$ formation. The exponents x and y depends more or less on the engine and specifically on the combustor. Experimentally derived, the $NO_X$ pressure exponent y, takes its value between 0.2 to 0.5. Ideally, it should be 0.5, based upon the state-of-the-art theories \cite{{Doug2006}}. \\
+
+ But the above mentioned method is not so general. It requires the knowledge of \textbf{Thrust Required} and performance related details of the aircraft. This makes it difficult to calculate emissions directly from the cockpit data, such as altitude, pressures \textemdash static and stagnation, temperature etc. Also, it becomes nearly impossible to tabulate a \textbf{global aviation emission inventory} in a more lucid and transparent manner \cite{Doug2006}. \\
+
+ Hence, there is a need of a more robust methodology. 
+ \subsection{Flue Flow Method 2} 
+ This method was developed by Boeing, and it requires the knowledge of the \textbf{rate of fuel flow} in the combustion chamber. The basic underlying theory behind this method, is that the air molecules are drawn in the engine and are compressed before combustion. The compression takes place reversible, i.e., no energy losses takes place because of friction and no heat is lost or gained during the process, i.e., adiabatic process. The process is colloquially known as \textbf{isentropic process}. Using the isentropic relations \ref{eq:isentropic}, we can derive a relation between the emissions at the sea level and that in a height
+
+ \begin{equation}
+       \frac{T_3}{T_1} = ({\frac{P_3}{P_1}})^{\frac{\gamma-1}{\gamma}}
+       \label{eq:isentropic}
+ \end{equation}
+ Where, $T_3$ is the inlet temperature of the combustor,\\
+        $T_1$ is the inlet temperature of the diffuser,\\
+Before the air molecules reaches the combustion chamber, it is isentropically compressed, or brought to rest in the compressor. The inlet pressure is essentially the stagnation pressure. After combustion, the gas molecules again gains its kinetic energy.\\
+Further derivations are follows \textemdash
+\begin{equation*}
+    \begin{split}
+        T_3 &= T_1 (\frac{P_3}{P_1})^\frac{\gamma-1}{\gamma} \\
+        T_{3,alt} &= T_{1,alt}(\frac{P_{3,alt}}{P_{1,alt}})^\frac{\gamma-1}{\gamma} \\
+        T_{3,sl}&=518.67(\frac{P_{3,sl}}{14.696})^\frac{\gamma-1}{\gamma}
+    \end{split}
+\end{equation*}
+In consistence with the P3T3 method \textemdash
+\begin{equation}
+    \begin{split}
+        T_{3,sl}&=T_{3,alt}
+    \end{split}
+\end{equation}
+Hence, from the above relations \textemdash
+\begin{equation*}
+    \begin{split}
+        T_{3,alt}(\frac{P_{3,alt}}{P_{1,alt}})^\frac{\gamma-1}{\gamma}&=518.67(\frac{P_{3,sl}}{14.696})^\frac{\gamma-1}{\gamma} \\
+        \implies \frac{P_{3,alt}}{P_{1,alt}} &=\frac{\delta_1}{\theta_1 ^ \frac{\gamma-1}{\gamma}} \\
+   \end{split}
+\end{equation*}
+As, we know that, from our compressible fluid mechanics, the ratio of temperatures at stagnation pressure and static pressure, is given by \textemdash
+\begin{equation}
+    \beta = (1+\frac{\gamma-1}{2}M^2)
+\end{equation}
+So we have, 
+ \begin{equation*}
+     \begin{split}
+         \frac{P_{3,alt}}{P_{3,sl}} &=\frac{\delta_{amb}\beta^\frac{\gamma}{\gamma-1}}{(\theta_{amb}\beta)^\frac{\gamma}{\gamma-1}}\\
+         &=\frac{\delta_{amb}}{\theta_{amb}^\frac{\gamma}{\gamma-1}}
+     \end{split}
+ \end{equation*}
+ The $\gamma$ value for air is 1.4 (diatomic).So, we get \textemdash
+ \begin{equation}
+    \frac{P_{3,alt}}{P_{3,sl}} = \frac{\delta_{amb}}{\theta^{3.5}}
+ \end{equation}
+ However, the assumption of isentropic compression is not a good and practical assumption. Here we introduce a new term called \textbf{polytropic efficiency} $\eta_b$ which quite close to 0.90. Also, the assumption of $\gamma=1.38$ gives us better results, in compliance to the real flight conditions.
+The final equation for the EIs are so as given below \textemdash
+\begin{equation}
+    \begin{split}
+        EICO_{alt}&=EICO_{sl}(\frac{\theta_{amb^{3.3}}}{\delta_{amb}^{1.02}})^x \\
+        EIHC_{alt}&=EIHC_{sl}(\frac{\theta_{amb^{3.3}}}{\delta_{amb}^{1.02}})^x \\
+        EINO_{x,alt}&=EINO_{x,sl}(\frac{\delta_{amb^{1.02}}}{\theta_{amb}^{3.3}})^y e^{H} \\
+    \end{split}
+\end{equation}
+Here, $\delta_{amb} = \frac{P_1}{14.696}$, $\theta_{amb} = \frac{T_{amb}}{518.67}$.\\
+
+Further derivations is not carried on here, relating the fuel-flow and the ambient cockpit data. They are left for the presentation and other future works, since that requires an extensive knowledge in \textbf{Gas-Dynamics} and \textbf{Perturbation Theory}. Nevertheless, we will try our best to have an expertise over these.
+%It is frequently split into subsections, such as Section~\ref{sec:maths} below.
+
+%\subsection{Maths}
+%\label{sec:maths} % used for referring to this section from elsewhere
+
+
+
+
+
+%Refer back to them as e.g. equation~(\ref{eq:quadratic}).
+
+
+% Example figure
+
+
+% Example table
+
+
+
+\section{Computations}
+
+The computations are left for the final presentation, in which we would try to relate the relations between various parameters, such as EIs and bypass ratios, TSFC and so on. We would utilise \textbf{curve-fitting} using least-square regression and \textbf{interpolations} and would come up with a explicit equations. Also we would try to replicate the procedures devised by ICAO and other existing literatures.
+
+\section*{Acknowledgements}
+
+Here, I would like to thank our Instructor Prof. Munish Chandel, our TAs, Rohit and Laukik for their constant support and guidance throughout the course and Munish sir's outstanding way of delivering concepts to us in a very lucid and interesting manner.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Data Availability}
+
+ 
+We have acquired data from the ICAO database. The data is there in our GitHub repository. It contains the fuel flow rates in various engines, emission factors, fuel consumption in LTO and CCD cycles. The link of the excel sheet containing data is appended in Appendix A.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%% REFERENCES %%%%%%%%%%%%%%%%%%
+
+% The best way to enter references is to use BibTeX:
+
+%\bibliographystyle{mnras}
+%\bibliography{example} % if your bibtex file is called example.bib
+
+
+% Alternatively you could enter them by hand, like this:
+% This method is tedious and prone to error if you have lots of references
+\begin{thebibliography}{99}
+\bibitem[\protect\citeauthoryear{C. Zhang}{2022}]{C. Zhang2022}
+Cuiqi Zhang, Longfei Chen, Shuiting Ding, Xingfan Zhou, Rui Chen, Xiaole Zhang, Zhenhong Yu, Jing Wang,
+Mitigation effects of alternative aviation fuels on non-volatile particulate matter emissions from aircraft gas turbine engines: A review, Science of The Total Environment, Volume 820, 2022, 153233, ISSN 0048-9697,
+\bibitem[\protect\citeauthoryear{Doug}{2006}]{Doug2006}
+DuBois, Doug, and Gerald C. Paynter. “‘Fuel Flow Method2’ for Estimating Aircraft Emissions.” SAE Transactions 115 (2006): 1–14. http://www.jstor.org/stable/44657657.
+\bibitem[\protect\citeauthoryear{Balasubramanian}{2005}]{Balasubramanian2005}
+Brian Kim, Gregg Fleming, Sathya Balasubramanian, Andrew Malwitz,
+and Joosung Lee Volpe National Transportation Systems Center Environmental Measurements and Modeling Division Cambridge, MA
+\bibitem[\protect\citeauthoryear{FAA}{2005}]{FAA2005}
+Federal Aviation Administration (FAAb
+). “System for assessing Aviation’s Global Emissions (SAGE),
+Version 1.5, Validation Assessment, Model Assumptions and Uncertainties.” FAA, Office of
+Environment and Energy. FAA-AEE-2005-03. September 2005.
+\bibitem[\protect\citeauthoryear{Cheng}{2020}]{Cheng2020}Hao Xu, Kai Xiao, Jinping Cheng, Yamei Yu, Qizhen Liu, Jun Pan, Jiajia Chen, Fangting Chen, Qingyan Fu,
+Characterizing aircraft engine fuel and emission parameters of taxi phase for Shanghai Hongqiao International Airport with aircraft operational data,
+Science of The Total Environment, Volume 720, 2020, 137431, ISSN 0048-9697
+\bibitem[\protect\citeauthoryear{ICAO}{2017}]{ICAO2017}International Civil Aviation Organization , Annex 16-Environmental Protection Volume
+I, Aircraft Noise, 2017
+\bibitem[\protect\citeauthoryear{IPCC}{1999}]{IPCC1999}IPCC, 1999 – J.E.Penner, D.H.Lister, D.J.Griggs, D.J.Dokken, M.McFarland (Eds.) Prepared in collaboration with the Scientific Assessment Panel to the Montreal Protocol on Substances that Deplete the Ozone Layer Cambridge University Press, UK. pp 373 Available from Cambridge University Press, The Edinburgh Building Shaftesbury Road, Cambridge CB2 2RU ENGLAND
+\bibitem[\protect\citeauthoryear{IPCC}{1995}]{IPCC1995} IPCC SECOND ASSESSMENT REPORT, 1995, CLIMATE CHANGE 1995 — The Science of Climate Change
+(including Summary for Policymakers). Report of IPCC Working
+Group I, 1995.
+
+%\bibitem[\protect\citeauthoryear{Others}{2013}]{Others2013}
+%Others S., 2012, Journal of Interesting Stuff, 17, 198
+\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%% APPENDICES %%%%%%%%%%%%%%%%%%%%%
+
+\appendix
+
+\section{Some extra material}
+
+The link to my GitHub repository containing the data for computation, the additional reading materials and the \LaTeX code of this document is below.\\
+Link: 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Don't change these lines
+\bsp	% typesetting comment
+\label{lastpage}
+\end{document}
+
+% End of mnras_template.tex
